@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-const PORT = 3000;
+const PORT = 5000;
 
 const app = express();
 

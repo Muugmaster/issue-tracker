@@ -40,7 +40,7 @@ const CreateIssue = () => {
                 <MenuItem key="medium" value="medium">
                     Medium
                 </MenuItem>
-                <MenuItem key="High" value="high">
+                <MenuItem key="high" value="high">
                     High
                 </MenuItem>
                 <MenuItem key="very-high" value="very-high">
