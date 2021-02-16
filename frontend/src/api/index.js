@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://45.32.154.82:5000/issues";
+const URL = "http://localhost:5000/issues";
 
 export const fetchIssues = () => axios.get(URL);
 

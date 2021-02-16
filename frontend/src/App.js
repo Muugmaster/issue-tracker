@@ -97,40 +97,6 @@ function App() {
       </Box>
     );
   }
-
-  // return (
-  //   <Box m={4}>
-  //     <Typography
-  //       variant="h2"
-  //       component="h2"
-  //       align="center"
-  //       color="primary"
-  //       gutterBottom
-  //     >
-  //       Issue Tracker
-  //     </Typography>
-  //     <Grid container spacing={2}>
-  //       <Grid item xs={12} lg={6}>
-  //         <Box mx="auto">
-  //           <CreateIssue setRequestData={setRequestData} />
-  //         </Box>
-  //       </Grid>
-  //       <Grid item xs={12} lg={6}>
-  //         {issues.map((data) => (
-  //           <Issue
-  //             key={data._id}
-  //             id={data._id}
-  //             createdAt={data.createdAt}
-  //             assignTo={data.assignTo}
-  //             priority={data.priority}
-  //             desc={data.description}
-  //             setRequestData={setRequestData}
-  //           />
-  //         ))}
-  //       </Grid>
-  //     </Grid>
-  //   </Box>
-  // );
 }
 
 export default App;
