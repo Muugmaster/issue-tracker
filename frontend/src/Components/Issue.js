@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import { deleteIssue } from "../api";
 
@@ -9,17 +9,32 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 const Issue = ({ id, createdAt, assignTo, priority, desc, setRequestData }) => {
-  const handleDelete = async (e) => {
-    e.preventDefault();
-    //console.log(e.currentTarget.value);
-    deleteIssue(e.currentTarget.value);
+  const [open, setOpen] = useState(false);
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
     setRequestData(new Date());
   };
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    //console.log(e.currentTarget.value);
+    await deleteIssue(e.currentTarget.value).then(setOpen(true));
+  };
+
   return (
-    <Grid item xs={12} lg={10}>
+    <Grid item xs={12} lg={4}>
       <Box mb={3}>
         <Card>
           <CardContent>
@@ -50,6 +65,11 @@ const Issue = ({ id, createdAt, assignTo, priority, desc, setRequestData }) => {
           </CardActions>
         </Card>
       </Box>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="warning">
+          Deleting issue...
+        </Alert>
+      </Snackbar>
     </Grid>
   );
 };

@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 // "mongodb://mongo:27017/TestDB"
 //Connect to DB
 mongoose
-  .connect("mongodb://0.0.0.0:80/TestDB", {
+  .connect("mongodb://mongo:27017/TestDB", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

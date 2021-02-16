@@ -5,29 +5,45 @@ import { MenuItem } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 import { createIssue } from "../api";
 
-const CreateIssue = ({ setRequestCreateData }) => {
+const CreateIssue = () => {
   const [newIssue, setNewIssue] = useState({
     assignTo: "",
     priority: "",
     description: "",
   });
+  const [open, setOpen] = useState(false);
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     //console.log(newIssue);
-    createIssue(newIssue);
-    setNewIssue({ assignTo: "", priority: "", description: "" });
-    setRequestCreateData(new Date());
+    createIssue(newIssue).then(
+      setNewIssue({ assignTo: "", priority: "", description: "" })
+    );
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
   };
 
   return (
-    <Box mx="auto" width="90%">
+    <Box mx="auto" width="70%">
       <form onSubmit={handleSubmit}>
         <div>
           <FormControl fullWidth={true}>
             <TextField
+              required={true}
               id="assignTo"
               select
               label="Assign To"
@@ -56,6 +72,7 @@ const CreateIssue = ({ setRequestCreateData }) => {
         <div>
           <FormControl fullWidth={true}>
             <TextField
+              required={true}
               id="priority"
               select
               label="Priority"
@@ -84,6 +101,7 @@ const CreateIssue = ({ setRequestCreateData }) => {
         <div>
           <FormControl fullWidth={true}>
             <TextField
+              required={true}
               id="description"
               label="Description"
               helperText="Add description for the issue"
@@ -97,10 +115,22 @@ const CreateIssue = ({ setRequestCreateData }) => {
             />
           </FormControl>
         </div>
-        <Button variant="contained" color="primary" size="large" type="submit">
-          Add Issue
-        </Button>
+        <Box align="center">
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            type="submit"
+          >
+            Add Issue
+          </Button>
+        </Box>
       </form>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Issue added succesfully!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
