@@ -9,6 +9,8 @@ services:
     restart: always
     links:
       - backend
+    networks:
+      - webappnetwork
 
   db:
     image: mongo
@@ -16,6 +18,8 @@ services:
       - "27017:27017"
     container_name: mongo
     restart: always
+    networks:
+      - webappnetwork
 
   backend:
     build: ./backend
@@ -25,3 +29,9 @@ services:
     restart: always
     links:
       - db
+    networks:
+      - webappnetwork
+
+networks:
+  webappnetwork:
+    driver: bridge
