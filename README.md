@@ -1,7 +1,7 @@
 # Simple Issue Tracker
 
 ![Issue](./screenshots/issues.png)
-![Add Issue](./Screenshots/create-issue.png)
+![Add Issue](./screenshots/create-issue.png)
 
 ### About the project
 
